@@ -3,8 +3,6 @@ import 'styles/index.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router' // react-router v4/v5
-import { ConnectedRouter } from 'connected-react-router'
 import App from 'containers/App';
 import configureStore, { history } from 'store/configureStore';
 import * as serviceWorker from 'serviceWorker';
@@ -13,14 +11,7 @@ const store = configureStore();
 const renderApp = () =>
   render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <> { /* your usual react-router v4/v5 routing */ }
-          <Switch>
-            <Route exact path="/" render={() => (<div>Match</div>)} />
-            <Route render={() => (<div>Miss</div>)} />
-          </Switch>
-        </>
-      </ConnectedRouter>
+      <App history={ history } />
     </Provider>,
     document.getElementById('root')
   )
