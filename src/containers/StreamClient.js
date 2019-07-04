@@ -1,10 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-class Home extends React.Component {
+class StreamClient extends React.Component {
   render() {
+    const { match } = this.props;
+    const { params = {} } = match;
+    const { userId } = params;
+
     return (
-      <div>Home</div>
+      <div>Stream Client: { userId }</div>
     )
   }
 }
@@ -24,4 +28,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(StreamClient);

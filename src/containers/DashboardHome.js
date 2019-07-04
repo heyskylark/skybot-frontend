@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-class Home extends React.Component {
+class DashboardHome extends React.Component {
   render() {
     return (
-      <div>Home</div>
+      <div>Dashboard Home</div>
     )
   }
 }
@@ -24,4 +24,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(DashboardHome);
