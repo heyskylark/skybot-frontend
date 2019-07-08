@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const NavBar = () => (
@@ -10,4 +11,12 @@ const NavBar = () => (
   </div>
 )
 
-export default NavBar
+function mapStateToProps(state) {
+  return {
+    loginState: state.loginState
+  };
+}
+
+export default connect(
+  mapStateToProps
+)(NavBar);

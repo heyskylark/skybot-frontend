@@ -1,3 +1,5 @@
+import ApiService from 'utils/ApiService';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
@@ -5,53 +7,50 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'
 
-export const requestLogin = creds => {
+export const requestLogin = () => {
   return {
-    type: LOGIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
-    creds
+    type: LOGIN_REQUEST
   }
 }
 
-export const loginSuccess = user => {
+export const loginSuccess = (token, user) => {
   return {
     type: LOGIN_SUCCESS,
-    isFetching: false,
-    isAuthenticated: true,
-    id_token: user.id_token
+    token: token,
+    user: user
   }
 }
 
 export const loginError = message => {
   return {
     type: LOGIN_FAILURE,
-    isFetching: false,
-    isAuthenticated: false,
     message
-  }
-}
-
-export const requestLogout = () => {
-  return {
-    type: LOGOUT_REQUEST,
-    isFetching: true,
-    isAuthenticated: true
   }
 }
 
 export const logoutSuccess = () => {
   return {
-    type: LOGOUT_SUCCESS,
-    isFetching: false,
-    isAuthenticated: false
+    type: LOGOUT_SUCCESS
   }
 }
 
-// Logs the user out
+export const loginUser = token => dispatch => {
+  dispatch(requestLogin())
+
+  ApiService.get('/user/me', { headers: {'Authorization': token} })
+    .then(user => {
+        localStorage.setItem('access_token', token);
+        dispatch(loginSuccess(token, user));
+      }, error => {
+        const { message } = error;
+        dispatch(loginError(`Login error: ${message}`));
+      }
+    ).catch(error => {
+      dispatch(loginError(`Login error: ${error}`));
+    });
+}
+
 export const logoutUser = () => dispatch => {
-  dispatch(requestLogout())
-  localStorage.removeItem('id_token')
   localStorage.removeItem('access_token')
   dispatch(logoutSuccess())
 }

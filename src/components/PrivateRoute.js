@@ -5,7 +5,6 @@ import { Redirect, Route } from 'react-router-dom'
 
 const PrivateRoute = (props) => {
   // Add your own authentication on the below line.
-  console.log(props);
   const { loginState } = props;
   const { isAuthorized } = loginState;
   const rest = props.rest;

@@ -5,7 +5,7 @@ import Home from 'containers/Home';
 import Login from 'containers/Login';
 import DashboardHome from 'containers/DashboardHome';
 import StreamClient from 'containers/StreamClient';
-import PrivateRoute from 'components/PrivateRoute';
+// import PrivateRoute from 'components/PrivateRoute';
 
 const routes = (
   <div>
@@ -13,7 +13,8 @@ const routes = (
     <Switch>
       <Route exact path="/" component={ Home } />
       <Route exact path="/login" component={ Login } />
-      <PrivateRoute path="/dashboard" component={ DashboardHome } />
+      <Route exact path="/dashboard" component={ DashboardHome } />
+      {/* <PrivateRoute path="/dashboard" component={ DashboardHome } /> */}
       {/* <Route exact path="/skybot-command" */}
       <Route exact path="/stream-client/:userId" component={ StreamClient } />
     </Switch>
