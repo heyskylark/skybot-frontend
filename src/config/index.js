@@ -1,7 +1,7 @@
 const dev = {
   BACKEND_URI: 'http://localhost:8080',
   FRONTEND_URI: 'http://localhost:3000',
-  REDIRECT_URI: 'http://localhost:3000/dashboard'
+  REDIRECT_URI: 'http://localhost:3000/authentication'
 };
 
 const prod = {

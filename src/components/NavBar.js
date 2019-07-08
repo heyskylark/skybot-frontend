@@ -7,6 +7,7 @@ const NavBar = () => (
     <div><Link to="/">Home</Link></div>
     <div><Link to="/dashboard">Dashboard</Link></div>
     <div><Link to="/stream-client/12345">Stream Client</Link></div>
+    <div><Link to="/voice">Voice Command Client</Link></div>
     <div><Link to="/login">Login</Link></div>
   </div>
 )

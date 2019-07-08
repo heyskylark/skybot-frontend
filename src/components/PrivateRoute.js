@@ -5,8 +5,11 @@ import { Redirect, Route } from 'react-router-dom'
 
 const PrivateRoute = (props) => {
   // Add your own authentication on the below line.
+  // Need a permissions check for things like access to voice, etc.
+  // Maybe permissions stored in the loginState
+  // but permissions needed passed into component to compare
   const { loginState } = props;
-  const { isAuthorized } = loginState;
+  const { isAuthenticated } = loginState;
   const rest = props.rest;
   const Component = props.component;
 
@@ -14,7 +17,7 @@ const PrivateRoute = (props) => {
     <Route
       {...rest}
       render={props =>
-        isAuthorized ? (
+        isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
@@ -25,7 +28,10 @@ const PrivateRoute = (props) => {
 }
 
 PrivateRoute.propTypes = {
-  component: PropTypes.object.isRequired,
+  component: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object
+  ]).isRequired,
   loginState: PropTypes.object.isRequired,
   rest: PropTypes.object
 };
