@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import 'styles/App.css';
 import NavBar from 'components/NavBar';
 import { ConnectedRouter } from 'connected-react-router';
 import routes from 'routes'
