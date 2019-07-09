@@ -7,6 +7,7 @@ import queryString from 'query-string'
 import ApiService from 'utils/ApiService';
 
 import * as loginActions from 'actions/login';
+import * as meActions from 'actions/me';
 
 class Authentication extends React.Component {
   constructor(props) {
@@ -36,7 +37,8 @@ class Authentication extends React.Component {
       ApiService.get('/user/me', { headers: {'Authorization': token} })
       .then(user => {
           localStorage.setItem('access_token', token);
-          this.props.loginActions.loginSuccess(token, user);
+          this.props.loginActions.loginSuccess(token);
+          this.props.meActions.fetchUserSuccess(user);
           this.setState({ isFetching: false });
         }, error => {
           const { message } = error;
@@ -84,7 +86,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginActions: bindActionCreators(loginActions, dispatch)
+    loginActions: bindActionCreators(loginActions, dispatch),
+    meActions: bindActionCreators(meActions, dispatch)
   };
 }
 

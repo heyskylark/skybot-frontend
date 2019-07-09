@@ -1,11 +1,18 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import 'styles/App.css';
 import { ConnectedRouter } from 'connected-react-router';
 import routes from 'routes'
 
+import * as appLoadActions from 'actions/appLoad';
+
 class App extends React.Component {
+  componentDidMount() {
+    this.props.appLoadActions.checkUserStatus();
+  }
+
   render() {
     const { history } = this.props;
     return(
@@ -18,21 +25,16 @@ class App extends React.Component {
 
 App.propTypes = {
   history: PropTypes.object.isRequired,
-}
-
-function mapStateToProps(state) {
-  return {
-    
-  };
+  appLoadActions: PropTypes.object.isRequired
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    appLoadActions: bindActionCreators(appLoadActions, dispatch)
   };
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App);

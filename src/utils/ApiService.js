@@ -20,7 +20,7 @@ class ApiService {
         (this[method] = (path, { params, data, headers = {} } = {}) =>
           new Promise((resolve, reject) => {
             const request = superagent[method](formatUrl(path));
-            const token = ''; // get token if exists in storage
+            const token = localStorage.getItem('access_token') ? localStorage.getItem('access_token') : '';
             const tokenHeader = 'Authorization';
             headers = {
               ...headers,

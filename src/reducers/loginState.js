@@ -2,9 +2,7 @@ import {
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS
 } from 'actions/login';
 
-// Prob have to figure out how to get user object when initializing if logged in
 const defaultState = {
-  user: {},
   token: localStorage.getItem('access_token') ? localStorage.getItem('access_token') : '',
   isFetching: false,
   isAuthenticated: localStorage.getItem('access_token') ? true : false,
@@ -23,7 +21,6 @@ const loginState = (state = defaultState, action) => {
       return {
         ...state,
         token: action.token,
-        user: action.user,
         isFetching: false,
         isAuthenticated: true,
         errorMessage: ''
@@ -40,7 +37,6 @@ const loginState = (state = defaultState, action) => {
       return {
         ...state,
         token: '',
-        user: {},
         isFetching: false,
         isAuthenticated: false
       };
