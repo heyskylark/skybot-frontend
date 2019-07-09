@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import NavBar from 'components/NavBar';
 import Home from 'containers/Home';
 import Login from 'containers/Login';
 import DashboardHome from 'containers/DashboardHome';
@@ -11,7 +10,6 @@ import Authentication from 'containers/Authentication';
 
 const routes = (
   <div>
-    <NavBar />
     <Switch>
       <Route exact path="/" component={ Home } />
       <Route exact path="/login" component={ Login } />

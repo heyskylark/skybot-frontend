@@ -3,10 +3,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import 'styles/App.css';
+import NavBar from 'components/NavBar';
 import { ConnectedRouter } from 'connected-react-router';
 import routes from 'routes'
 
 import * as appLoadActions from 'actions/appLoad';
+import * as loginActions from 'actions/login';
 
 class App extends React.Component {
   componentDidMount() {
@@ -14,12 +16,23 @@ class App extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, loginState, loginActions } = this.props;
+
     return(
-      <ConnectedRouter history={ history }>
-        { routes }
-      </ConnectedRouter>
-    )
+      <div>
+        <ConnectedRouter history={ history }>
+          <NavBar 
+            loginState={loginState}
+            onClick={() => this.logout(loginActions)}
+          />
+          { routes }
+        </ConnectedRouter>
+      </div>
+    ) 
+  }
+
+  logout(loginActions) {
+    loginActions.logoutUser();
   }
 }
 
@@ -28,13 +41,20 @@ App.propTypes = {
   appLoadActions: PropTypes.object.isRequired
 }
 
+function mapStateToProps(state) {
+  return {
+    loginState: state.loginState
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-    appLoadActions: bindActionCreators(appLoadActions, dispatch)
+    appLoadActions: bindActionCreators(appLoadActions, dispatch),
+    loginActions: bindActionCreators(loginActions, dispatch)
   };
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(App);
