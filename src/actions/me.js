@@ -1,4 +1,5 @@
 import ApiService from 'utils/ApiService';
+import * as loginActions from 'actions/login';
 
 export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -28,13 +29,16 @@ export const fetchUserFailure = message => {
 export const fetchUser = () => dispatch => {
   dispatch(fetchUserRequest());
   
-  ApiService.get('/user/me')
+  return ApiService.get('/user/me')
     .then(
       user => {
         dispatch(fetchUserSuccess(user));
       }, error => {
-        const { message } = error;
+        const { status, message } = error;
         dispatch(fetchUserFailure(`Fetch user error: ${message}`));
+        if (status === 401) {
+          dispatch(loginActions.logoutUser());
+        }
       }
     ).catch(error => {
       dispatch(fetchUserFailure(`Fetch user error: ${error}`));

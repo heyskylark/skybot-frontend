@@ -16,7 +16,7 @@ const routes = (
       <Route exact path="/authentication" component={ Authentication } />
       <PrivateRoute path="/dashboard" component={ DashboardHome } />
       <PrivateRoute path="/voice" component={ VoiceCommand } />
-      <Route exact path="/stream-client/:userId" component={ StreamClient } />
+      <Route exact path="/stream-client/:userToken" component={ StreamClient } />
     </Switch>
   </div>
 )
