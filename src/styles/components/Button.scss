@@ -1,0 +1,46 @@
+.button {
+  &:hover, &:active, &:focus {
+    outline: 0;
+  }
+
+  padding: 0 8px;
+    font-size: 14px;
+    text-transform: capitalize;
+    background: #31c3a2;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    display: inline-block;
+    height: 34px;
+    line-height: 32px;
+    transition: all 275ms;
+    font-weight: 500;
+    border-radius: 4px;
+    font-family: Roboto;
+    border: 1px solid transparent;
+    text-decoration: none;
+
+  &.button--twitch {
+    background-color: #6542a6;
+  }
+}
+
+.login-button {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  margin: 6px 10px;
+  width: 100%;
+
+  .svg-inline--fa {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+}

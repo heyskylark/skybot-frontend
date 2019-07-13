@@ -1,15 +1,22 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import NavBar from 'components/NavBar';
+import { bindActionCreators } from 'redux';
 import { ConnectedRouter } from 'connected-react-router';
-import routes from 'routes'
+import PropTypes from 'prop-types';
+import routes from 'routes';
+import NavBar from 'components/NavBar';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 import * as appLoadActions from 'actions/appLoad';
 import * as loginActions from 'actions/login';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    library.add(fab);
+  }
+
   componentDidMount() {
     this.props.appLoadActions.checkUserStatus();
   }

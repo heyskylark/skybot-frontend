@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 class Home extends React.Component {
   render() {
     return (
-      <div>Home</div>
+      <div>
+        <div>Home And Login</div>
+        <div>Functionality</div>
+        <div>Vocie</div>
+        <div>Easy to Setup: Steps</div>
+      </div>
     )
   }
 }
